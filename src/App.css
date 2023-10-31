@@ -121,4 +121,11 @@ header {
 
 a {
   color: ffd60a !important;
+  font-weight: 500;
+}
+
+p,
+span {
+  color: #000;
+  font-weight: 500;
 }

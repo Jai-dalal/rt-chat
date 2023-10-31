@@ -12,8 +12,8 @@ export default function Header() {
       </a>
       {auth.user() ? (
         <>
-          <div>
-            Welcome <strong>{username}</strong>
+          <div className="details">
+            Welcome, &nbsp;<strong>{username}</strong>
             <button
               className="header_cta"
               onClick={() => {

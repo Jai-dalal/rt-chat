@@ -5,6 +5,10 @@ dayjs.extend(relativeTime);
 import { MdVerified } from "react-icons/md";
 import { truncateText } from "../utils";
 
+
+
+
+
 export default function Message({ message, isYou }) {
   const countyCode =
     message.country && message.country !== "undefined"
@@ -12,6 +16,9 @@ export default function Message({ message, isYou }) {
       : "";
 
   console.log(message);
+
+  console.log(dayjs(message))
+
   return (
     <Box display="grid" justifyItems={isYou ? "end" : "start"}>
       <Grid
@@ -47,12 +54,13 @@ export default function Message({ message, isYou }) {
           justifySelf="start"
           color="gray.500"
           mb="2"
+          className="center_very gap-2"
         >
           <span>{message.username} </span>
           {message.is_authenticated && (
             <MdVerified
               color="#1d9bf0"
-              style={{ display: "inline", marginRight: "5px" }}
+              style={{ display: "inline", }}
             />
           )}
           {!countyCode && (
@@ -76,8 +84,8 @@ export default function Message({ message, isYou }) {
           {truncateText(message.text)}
         </GridItem>
         <GridItem
-          color="gray"
-          fontSize="10px"
+          color="black"
+          fontSize="12px"
           justifySelf="end"
           alignSelf="end"
         >

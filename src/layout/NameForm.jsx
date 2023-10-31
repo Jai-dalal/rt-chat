@@ -57,7 +57,7 @@ export default function NameForm() {
         />
       ) : (
         <span className="center_very gap-2">
-          Welcome <strong> {newUsername}</strong>
+          Welcome, <strong> {newUsername}</strong>
         </span>
       )}
       <IconButton
