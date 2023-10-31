@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "../context/appContext";
 import Messages from "./Messages";
 import { BsChevronDoubleDown } from "react-icons/bs";
+import MessageForm from "./MessageForm";
 
 export default function Chat() {
   const [height, setHeight] = useState(window.innerHeight - 205);
@@ -20,12 +21,12 @@ export default function Chat() {
   }, []);
 
   return (
-    <Container maxW="600px" pb="20px">
+    <Container className="real_conat" maxW="600px" p="0px" mt="50px">
       <Box
+        className="main_container"
         bg="white"
         p="5"
         overflow="auto"
-        borderRadius="10px"
         height={height}
         onScroll={onScroll}
         ref={scrollRef}
@@ -61,6 +62,7 @@ export default function Chat() {
           </div>
         )}
       </Box>
+      <MessageForm />
     </Container>
   );
 }

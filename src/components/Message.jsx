@@ -10,6 +10,8 @@ export default function Message({ message, isYou }) {
     message.country && message.country !== "undefined"
       ? message.country.toLowerCase()
       : "";
+
+  console.log(message);
   return (
     <Box display="grid" justifyItems={isYou ? "end" : "start"}>
       <Grid
@@ -53,12 +55,12 @@ export default function Message({ message, isYou }) {
               style={{ display: "inline", marginRight: "5px" }}
             />
           )}
-          {countyCode && (
+          {!countyCode && (
             <Box display="inline-block" fontSize="10px">
               from {message.country}{" "}
               <img
                 style={{ display: "inline-block", marginTop: "-4px" }}
-                src={`/flags/${countyCode}.png`}
+                src={`/flags/${message.country}.png`}
                 alt={message.country}
               />
             </Box>

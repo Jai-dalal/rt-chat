@@ -27,19 +27,17 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <AppContextProvider>
-        <Box bg="gray.100">
-          {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
-          <Router>
-            <Switch>
-              <Route exact path="/">
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <main>
                 <Header username={username} setUsername={setUsername} />
                 <Chat username={username} />
-                <Footer username={username} />
-              </Route>
-              <Route>Not found</Route>
-            </Switch>
-          </Router>
-        </Box>
+              </main>
+            </Route>
+            <Route>Not found</Route>
+          </Switch>
+        </Router>
       </AppContextProvider>
     </ChakraProvider>
   );

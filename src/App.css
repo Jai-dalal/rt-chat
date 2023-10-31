@@ -1,9 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
 body {
+  background-color: black;
+  background-image: url("/Hero_Bg.png") !important;
+  background-position: center center !important;
+  background-size: cover !important;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  backdrop-filter: blur(20px);
+  margin: 0;
 }
+
 html {
   height: -webkit-fill-available;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1730px;
+  margin: 0 20px;
+  background: black;
+  color: #fff;
+  z-index: 99;
+  top: 1.6rem;
+  bottom: auto;
+  left: 2rem;
+  right: 2rem;
+  position: sticky;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.logo {
+  max-width: 180px;
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header_cta {
+  z-index: 1;
+  color: #000;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: #ffd60a;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  min-width: 150px;
+  font-size: 1em;
+  font-weight: 500;
+  display: flex;
+  position: relative;
+  line-height: 1;
+  margin-left: 24px;
+  transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-radius: 0.52em;
+}
+
+.center_very {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.gap-2 {
+  gap: 5px;
+}
+
+.message_form form {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: white;
+  justify-content: space-between;
+}
+
+.main-container {
+  border-radius: 10px 10px 0 0;
+}
+
+.real_conat {
+  border-radius: 15px !important;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -18,15 +110,15 @@ html {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   /* background: #888; */
-  background: #3faaac;
+  background: #ffd60a;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #2c7a7b;
+  background: #ffd60a;
 }
 
 a {
-  color: teal !important;
+  color: ffd60a !important;
 }

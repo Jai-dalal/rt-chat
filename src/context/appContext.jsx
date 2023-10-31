@@ -15,22 +15,28 @@ const AppContextProvider = ({ children }) => {
   const [loadingInitial, setLoadingInitial] = useState(true);
   const [routeHash, setRouteHash] = useState("");
   const [isOnBottom, setIsOnBottom] = useState(false);
-  const [newIncomingMessageTrigger, setNewIncomingMessageTrigger] =
-    useState(null);
+  const [newIncomingMessageTrigger, setNewIncomingMessageTrigger] = useState(null);
   const [unviewedMessageCount, setUnviewedMessageCount] = useState(0);
-  const [countryCode, setCountryCode] = useState("");
+  const [countryCode, setCountryCode] = useState(""); // State to store country code
 
   const getLocation = async () => {
     try {
-      const res = await fetch("https://api.db-ip.com/v2/free/self");
-      const { countryCode, error } = await res.json();
-      if (error) throw new Error(error);
+      const res = await fetch("http://ip-api.com/json/");
+      const data = await res.json();
 
-      setCountryCode(countryCode);
-      localStorage.setItem("countryCode", countryCode);
+      const { countryCode, message } = data;
+      if (message === 'private range' || message === 'reserved range') {
+        throw new Error('Private or Reserved IP Address');
+      }
+
+      if (countryCode) {
+        setCountryCode(countryCode); // Set country code to state
+      } else {
+        throw new Error('Country code not found');
+      }
     } catch (error) {
       console.error(
-        `error getting location from api.db-ip.com:`,
+        `Error getting location from http://ip-api.com/json/:`,
         error.message
       );
     }
@@ -55,24 +61,17 @@ const AppContextProvider = ({ children }) => {
     initializeUser();
     getMessagesAndSubscribe();
 
-    // const storedUser = localStorage.getItem("username");
-    // if (storedUser) setUsername(storedUser);
-    // else setUsername(`@user${Date.now().toString().substr(-4)}`);
-
     const storedCountryCode = localStorage.getItem("countryCode");
-    if (storedCountryCode && storedCountryCode !== "undefined")
+    if (storedCountryCode && storedCountryCode !== "undefined") {
       setCountryCode(storedCountryCode);
-    else getLocation();
+    } else {
+      getLocation(); // Fetch location if not stored in localStorage
+    }
 
     supabase.auth.onAuthStateChange((event, session) => {
       console.log("onAuthStateChange", { event, session });
       if (event === "SIGNED_IN") initializeUser();
     });
-    // const { hash, pathname } = window.location;
-    // if (hash && pathname === "/") {
-    //   console.log("hash", hash);
-    //   setRouteHash(hash);
-    // }
 
     return () => {
       supabase.removeSubscription();
@@ -87,7 +86,6 @@ const AppContextProvider = ({ children }) => {
 
   const handleNewMessage = (payload) => {
     setMessages((prevMessages) => [payload.new, ...prevMessages]);
-    //* needed to trigger react state because I need access to the username state
     setNewIncomingMessageTrigger(payload.new);
   };
 
@@ -98,7 +96,6 @@ const AppContextProvider = ({ children }) => {
         .select()
         .range(0, 49)
         .order("id", { ascending: false });
-      // console.log(`data`, data);
       setLoadingInitial(false);
       if (error) {
         setError(error.message);
@@ -133,9 +130,7 @@ const AppContextProvider = ({ children }) => {
       setIsOnBottom(false);
     }
 
-    //* Load more messages when reaching top
     if (target.scrollTop === 0) {
-      // console.log("messages.length :>> ", messages.length);
       const { data, error } = await supabase
         .from("messages")
         .select()

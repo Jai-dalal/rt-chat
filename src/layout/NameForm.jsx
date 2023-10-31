@@ -36,43 +36,46 @@ export default function NameForm() {
     localStorage.setItem("username", newUsername);
   };
 
+  const [showBorder, setUseBorder] = useState(false);
+  const blur = () => {
+    setUseBorder(true);
+  };
+
   return (
-    <form onSubmit={handleSubmit} style={{ marginRight: "20px" }}>
-      <Stack direction="row">
-        {isEditing ? (
-          <Input
-            name="username"
-            placeholder="Choose a username"
-            onChange={(e) => setNewUsername(e.target.value)}
-            value={newUsername}
-            bg="gray.100"
-            size="sm"
-            border="none"
-            onBlur={handleSubmit}
-            ref={inputRef}
-            maxLength="15"
-          />
-        ) : (
-          <span onClick={toggleEditing} style={{ cursor: "pointer" }}>
-            Welcome <strong>{newUsername}</strong>
-          </span>
-        )}
-        <IconButton
-          size="sm"
-          paddingBottom="12px"
-          variant="outline"
-          colorScheme="teal"
-          aria-label="Save"
-          fontSize="15px"
-          icon={isEditing ? <BiSave /> : <BiEdit />}
-          border="none"
-          onClick={(e) => {
-            if (isEditing) {
-              handleSubmit(e);
-            } else toggleEditing();
-          }}
+    <form onSubmit={handleSubmit} className="center_very">
+      {isEditing ? (
+        <Input
+          name="username"
+          placeholder="Choose a username"
+          onChange={(e) => setNewUsername(e.target.value)}
+          value={newUsername}
+          onBlur={blur}
+          ref={inputRef}
+          border="0"
+          maxLength="15"
+          className={`${showBorder === true ? "border-red" : "border-none"}`}
         />
-      </Stack>
+      ) : (
+        <span className="center_very gap-2">
+          Welcome <strong> {newUsername}</strong>
+        </span>
+      )}
+      <IconButton
+        size="sm"
+        variant="outline"
+        colorScheme="teal"
+        aria-label="Save"
+        fontSize="16px"
+        marginLeft="10px"
+        className="pointer"
+        icon={isEditing ? <BiSave /> : <BiEdit />}
+        border="none"
+        onClick={(e) => {
+          if (isEditing) {
+            handleSubmit(e);
+          } else toggleEditing();
+        }}
+      />
     </form>
   );
 }

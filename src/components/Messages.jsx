@@ -22,7 +22,7 @@ export default function Messages() {
           colorScheme="red"
           variant="link"
         >
-          try to reconnect
+          Try refreshing your window
         </Button>
       </Alert>
     );

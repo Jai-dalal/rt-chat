@@ -53,10 +53,8 @@ export default function MessageForm() {
   };
 
   return (
-    <Box py="10px" pt="15px" bg="gray.100">
-      <Container maxW="600px">
+    <Box className="message_form">
         <form onSubmit={handleSubmit} autoComplete="off">
-          <Stack direction="row">
             <Input
               name="message"
               placeholder="Enter a message"
@@ -77,13 +75,7 @@ export default function MessageForm() {
               disabled={!message}
               isLoading={isSending}
             />
-          </Stack>
         </form>
-        <Box fontSize="10px" mt="1">
-          Warning: do not share any sensitive information, it's a public chat
-          room 🙂
-        </Box>
-      </Container>
     </Box>
   );
 }
